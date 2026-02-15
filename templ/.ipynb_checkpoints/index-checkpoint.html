@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Budget Tracker</title>
+    <script>
+        function addItem() {
+            let list = document.getElementById("itemList");
+            let item = document.getElementById("itemInput").value;
+            let li = document.createElement("li");
+            li.textContent = item;
+            list.appendChild(li);
+        }
+    </script>
+</head>
+<body>
+    <h2>Budget Tracker</h2>
+    <form method="post">
+        <label>Location:</label>
+        <input type="text" name="location" >
+        <br>
+        <label>Item:</label>
+        <input type="text" id="itemInput">
+        <button type="button" onclick="addItem()">Add</button>
+        <ul id="itemList"></ul>
+        <button type="submit">Calculate</button>
+    </form>
+    <py-script src="bed.py">
+    </py-script>
+</body>
+</html>

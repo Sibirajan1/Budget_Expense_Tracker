@@ -1,0 +1,33 @@
+<!-- templates/remove_item.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify Items</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Modify Shopping List</h1>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="error">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <form method="POST">
+        <ul>
+            {% for item in shopping_list %}
+            <li>
+                <input type="checkbox" name="check_{{ item.item_name }}"> {{ item.quantity }} x {{ item.item_name }}<br>
+                <input type="number" name="decrease_{{ item.item_name }}" placeholder="Decrease quantity (optional)" min="1" max="{{ item.quantity }}">
+            </li>
+            {% endfor %}
+        </ul>
+        <button type="submit" class="btn-primary">Recalculate Bill</button>
+    </form>
+</div>
+</body>
+</html>

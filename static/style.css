@@ -1,0 +1,137 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%); /* High contrast, vibrant gradient */
+    color: #fff; /* White text for maximum contrast */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.25); /* Slightly less transparent */
+    backdrop-filter: blur(12px); /* Increased blur for stronger frosted effect */
+    border-radius: 25px;
+    box-shadow: 0 12px 45px rgba(0, 0, 0, 0.3); /* Even stronger shadow */
+    padding: 60px;
+    width: 95%;
+    max-width: 800px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.4); /* More visible border */
+}
+
+h1, h2 {
+    color: #ffffff; /* Maintain white for strong contrast */
+    margin-bottom: 20px;
+}
+
+form input {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border: 1px solid #ecffa8; /* Vibrant border color (user's choice) */
+    border-radius: 8px;
+    font-size: 16px;
+    background: rgba(0, 0, 0, 0.2); /* Darker, more contrasting input background */
+    color: #ffffff; /* White text for high contrast */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+form input::placeholder {
+    color: rgba(255, 255, 255, 0.8); /* Brighter placeholder text */
+}
+
+form input:focus {
+    border-color: #ffeb3b; /* Brighter focus highlight */
+    background-color: rgba(0, 0, 0, 0.3); /* Slightly darker on focus */
+    outline: none;
+}
+
+/* General Button Styles */
+button, .button-link {
+    width: 100%;
+    padding: 15px 20px; /* Increased padding */
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px; /* Slightly more rounded corners */
+    font-size: 18px; /* Larger font size */
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transitions for all properties */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+button:hover, .button-link:hover {
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Specific Button Colors */
+.btn-primary {
+    background-color: #007bff; /* Blue for primary actions (e.g., Submit Budget, Calculate Bill) */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-success {
+    background-color: #28a745; /* Green for success actions (e.g., Add Item) */
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Red for destructive actions (e.g., Remove Items) */
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-info {
+    background-color: #17a2b8; /* Cyan for informational actions (e.g., Add More Items) */
+}
+
+.btn-info:hover {
+    background-color: #117a8b;
+}
+
+ul {
+    padding-left: 0;
+}
+
+li {
+    background: rgba(0, 0, 0, 0.3); /* Darker, more contrasting background */
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.6); /* More prominent border */
+    text-align: left;
+    color: #fff; /* White text for high contrast */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+li:hover {
+    background: rgba(0, 0, 0, 0.45); /* More visible on hover */
+    border-color: #ffeb3b; /* Highlight border on hover */
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+img {
+    max-width: 100%;
+    margin-top: 20px;
+    border-radius: 10px;
+}

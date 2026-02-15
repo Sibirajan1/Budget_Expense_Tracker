@@ -1,0 +1,28 @@
+<!-- templates/add_item.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Item</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Add Item</h1>
+    <form method="POST">
+        <input type="text" name="item_name" placeholder="Item Name" required>
+        <input type="number" name="quantity" placeholder="Quantity" required>
+        <button type="submit" class="btn-success">Add Item</button>
+    </form>
+
+    {% if shopping_list %}
+    <h2>Shopping List</h2>
+    <ul>
+        {% for item in shopping_list %}
+        <li>{{ item.quantity }} x {{ item.item_name }} - Rs. {{ item.total_price }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/calculate"><button class="btn-primary">Calculate Bill</button></a>
+    {% endif %}
+</div>
+</body>
+</html>

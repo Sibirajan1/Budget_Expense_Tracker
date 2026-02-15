@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Set Budget</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Enter Your Budget</h1>
+    <form action="/set_budget" method="POST">
+        <input type="number" name="budget" placeholder="Enter Budget in Rs" required>
+        <button type="submit" class="btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>

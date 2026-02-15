@@ -1,0 +1,30 @@
+<!-- templates/calculate.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bill Summary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Bill Summary</h1>
+    <ul>
+        {% for item in shopping_list %}
+        <li>{{ item.quantity }} x {{ item.item_name }}<br>
+            Min: Rs. {{ item.min_price }} | Max: Rs. {{ item.max_price }} | Predicted: Rs. {{ item.total_price }}
+        </li>
+        {% endfor %}
+    </ul>
+    <h2>Total: Rs. {{ total_predicted_bill }}</h2>
+    <p>{{ budget_message }}</p>
+
+    {% if show_remove_button %}
+    <a href="/remove_item"><button class="btn-danger">Remove Items</button></a>
+    {% else %}
+    <a href="/add_item"><button class="btn-info">Add More Items</button></a>
+    {% endif %}
+
+    <img src="/plot" alt="Pie Chart">
+</div>
+</body>
+</html>
