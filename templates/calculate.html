@@ -1,30 +1,117 @@
-<!-- templates/calculate.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Bill Summary</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartCart — Bill Summary</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
-<div class="container">
-    <h1>Bill Summary</h1>
-    <ul>
-        {% for item in shopping_list %}
-        <li>{{ item.quantity }} x {{ item.item_name }}<br>
-            Min: Rs. {{ item.min_price }} | Max: Rs. {{ item.max_price }} | Predicted: Rs. {{ item.total_price }}
-        </li>
-        {% endfor %}
-    </ul>
-    <h2>Total: Rs. {{ total_predicted_bill }}</h2>
-    <p>{{ budget_message }}</p>
 
-    {% if show_remove_button %}
-    <a href="/remove_item"><button class="btn-danger">Remove Items</button></a>
+<div class="page-wrapper">
+  <div class="container">
+
+    <!-- Brand -->
+    <div class="brand">
+      <span class="brand-dot"></span>
+      SmartCart
+    </div>
+
+    <!-- Heading -->
+    <h1>Bill summary</h1>
+    <p class="subtitle">Predicted prices based on current market rates. Min/Max shows the possible range.</p>
+
+    <!-- Bill items -->
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px;">
+      {% for item in shopping_list %}
+      <div class="bill-item" style="animation-delay:{{ loop.index0 * 0.06 }}s">
+        <div class="bill-item-left">
+          <div class="name">{{ item.item_name }}</div>
+          <div class="range">
+            <span class="range-min">▼ Rs.{{ item.min_price }}</span>
+            <span class="range-max">▲ Rs.{{ item.max_price }}</span>
+          </div>
+        </div>
+        <div class="bill-price-block">
+          <div class="bill-predicted">Rs. {{ item.total_price }}</div>
+          <div class="bill-qty">Qty: {{ item.quantity }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Total -->
+    <div class="total-card">
+      <div>
+        <div class="total-label">Predicted Total</div>
+        <div style="font-size:12px;color:var(--text-3);margin-top:3px;">Based on current prices</div>
+      </div>
+      <div class="total-amount">Rs. {{ total_predicted_bill }}</div>
+    </div>
+
+    <!-- Budget status badge -->
+    {% if 'over' in budget_message | lower or 'exceed' in budget_message | lower %}
+    <div class="status-badge over">
+      <span class="status-dot"></span>
+      {{ budget_message }}
+    </div>
     {% else %}
-    <a href="/add_item"><button class="btn-info">Add More Items</button></a>
+    <div class="status-badge under">
+      <span class="status-dot"></span>
+      {{ budget_message }}
+    </div>
     {% endif %}
 
-    <img src="/plot" alt="Pie Chart">
-</div>
+    <!-- Pie chart -->
+    <div class="chart-wrap">
+      <div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+                  color:var(--text-3);margin-bottom:12px;">Spend breakdown</div>
+      <img src="/plot" alt="Spending Pie Chart" loading="lazy" />
+    </div>
+
+    <!-- Actions -->
+    <div class="action-row">
+      {% if show_remove_button %}
+      <a href="/remove_item" style="display:contents;">
+        <button class="btn btn-danger">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6 18.1 20a2 2 0 0 1-2 1.9H7.9a2 2 0 0 1-2-1.9L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+          Remove Items
+        </button>
+      </a>
+      {% else %}
+      <a href="/add_item" style="display:contents;">
+        <button class="btn btn-info">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add More Items
+        </button>
+      </a>
+      {% endif %}
+
+      <a href="/" style="display:contents;">
+        <button class="btn btn-ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Start Over
+        </button>
+      </a>
+    </div>
+
+  </div><!-- /.container -->
+</div><!-- /.page-wrapper -->
+
+<script>
+  /* Stagger bill items in */
+  document.querySelectorAll('.bill-item').forEach((el, i) => {
+    el.style.animationDelay = `${i * 0.07}s`;
+    el.style.animation = 'fadeUp .4s ease both';
+  });
+</script>
+
+<style>
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+</style>
+
 </body>
 </html>
