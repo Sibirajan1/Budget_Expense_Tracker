@@ -45,5 +45,5 @@ print(f"Root Mean Squared Error (RMSE): {rmse}")
 print(f"R² Score: {r2*100}")
 
 # Save the trained model to a file
-joblib.dump(model, 'trained_model.pkl')
+joblib.dump(model, 'trained_model.pkl', compress=3)
 print("Model saved to 'trained_model.pkl'")
