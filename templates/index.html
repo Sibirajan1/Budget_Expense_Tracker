@@ -1,16 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Set Budget</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartCart — Set Budget</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
-<div class="container">
-    <h1>Enter Your Budget</h1>
-    <form action="/set_budget" method="POST">
-        <input type="number" name="budget" placeholder="Enter Budget in Rs" required>
-        <button type="submit" class="btn-primary">Submit</button>
+
+<div class="page-wrapper">
+  <div class="container">
+
+    <!-- Brand -->
+    <div class="brand">
+      <span class="brand-dot"></span>
+      SmartCart
+    </div>
+
+    <!-- Heading -->
+    <h1>Set your budget</h1>
+    <p class="subtitle">Define your spending limit before you start adding items to your cart.</p>
+
+    <!-- Form -->
+    <form action="/set_budget" method="POST" novalidate>
+      <div class="field-group">
+        <div class="field-wrap">
+          <label class="field-label" for="budget">Budget Amount</label>
+          <span class="field-icon">
+            <!-- Rupee icon -->
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="6" y1="4" x2="18" y2="4"/><line x1="6" y1="9" x2="14" y2="9"/>
+              <path d="M6 20l8-11"/><path d="M6 9a5 5 0 0 0 5 5h2"/>
+            </svg>
+          </span>
+          <input
+            type="number"
+            id="budget"
+            name="budget"
+            placeholder="e.g. 2500"
+            min="1"
+            required
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        Set Budget &amp; Continue
+      </button>
     </form>
-</div>
+
+  </div><!-- /.container -->
+</div><!-- /.page-wrapper -->
+
+<script>
+  /* Animate the card in on load */
+  document.addEventListener('DOMContentLoaded', () => {
+    const inp = document.getElementById('budget');
+    inp.addEventListener('input', () => {
+      const btn = document.querySelector('.btn-primary');
+      btn.style.opacity = inp.value ? '1' : '0.65';
+    });
+  });
+</script>
+
 </body>
 </html>
